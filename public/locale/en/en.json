@@ -1,0 +1,154 @@
+{
+    "welcome": "Welcome to our website",
+    "signIn": "Sign In",
+    "login": "Login",
+    "language": "Language",
+    "reviews" : "Customer Reviews",
+    "footer": {
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing"
+    },
+    "resources": {
+      "title": "Resources",
+      "blog": "Blog",
+      "guides": "User guides",
+      "webinars": "Webinars"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About us",
+      "contact": "Contact us"
+    },
+    "plans": {
+      "title": "Plans & Pricing",
+      "personal": "Personal",
+      "startup": "Start up",
+      "organization": "Organization"
+    },
+    "copyright": "AI-Powered Notes. All rights reserved."
+  },
+  "subscribe": {
+    "title": "Subscribe to our newsletter",
+    "placeholder": "Enter your email",
+    "button": "Subscribe"
+  },
+  "hero": {
+    "title": " Revolutionize Your Note Taking",
+    "placeholder": " Harness the power of AI to enhance productivity",
+    "button": "Get Started"
+  },
+  "features": {
+    "feature1": {
+      "title": "Contextual Insights",
+      "sample": "AI Analysis",
+      "description": "Gain deeper understanding with AI-driven insights and connections between your notes."
+    },
+    "feature2": {
+      "title": "Voice Recognition",
+      "sample": "Speech to Text",
+      "description": "Transcribe spoken words into text quickly and accurately, making note-taking hands-free and efficient."
+    },
+    "feature3": {
+      "title": "Smart Summarization",
+      "sample": "AI Technology",
+      "description": "Automatically condense lengthy notes into concise summaries, saving you time and effort."
+    },
+    "button": "Explore features",
+    "title":"Features"
+  },
+  "SingUp":{
+      "title": "Sign Up",
+      "name": "Your Name",
+      "subtitle": "Create a new account to get started",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "button": "Sign Up",
+      "signingUp": "Signing Up...",
+      "alreadyHaveAccount": "Already have an account?",
+      "loginHere": "Login here",
+      "passwordMismatch": "Passwords do not match",
+      "successful":"Sign Up successful!",
+      "or":"Or",
+      "google":" Sign Up with Google",
+      "facebook":"Sign Up with Facebook",
+      "apple":"Sign Up with Apple"
+  },
+  "Login":{
+      "title": "Login",
+      "subtitle": "Enter your credentials to access your account",
+      "email": "Email",
+      "password": "Password",
+      "button": "Login",
+      "login": "Login...",
+      "alreadyHaveAccount": "Don't have an account?",
+      "loginHere": "Create a new account",
+      "failed":"Invalid email or password",
+      "successful":"Login successful!",
+      "stayLoggedIn":"Stay Logged In",
+      "forgotPassword":"Forgot Password?",
+      "or":"Or",
+      "google":" Login with Google",
+      "facebook":"Login with Facebook",
+      "apple":"Login with Apple"
+  },
+  "ForgotPassword":{
+      "title": "Forgot Password",
+      "subtitle": "Enter your email to reset your password",
+      "email": "Email",
+      "button": "Send Reset Link",
+      "sending":"Sending...",
+      "successful":"Password reset successful!",
+      "failed":"Invalid email",
+      "remembered": "Remembered your password?",
+      "loginHere": "Login here",
+      "success":"If this email is registered, a reset link has been sent."
+  },
+  "VerifyOTP": {
+    "title": "Verify OTP",
+    "subtitle": "Enter the OTP sent to",
+    "noEmail": "No email found. Please sign up again.",
+    "otpPlaceholder": "Enter OTP",
+    "verifying": "Verifying...",
+    "button": "Verify OTP",
+    "success": "OTP verification successful! Redirecting...",
+    "error": "Invalid OTP. Please try again.",
+    "verifyButton":"Verify",
+    "resendButton": "Resend OTP Again"
+  },
+  "HomeAi":{
+      "To-Do List": "To-Do List",
+      "Add Task": "Add Task",
+      "Completed": " Completed",
+      "Incomplete": " Incomplete",
+      "View": " View",
+      "Delete": " Delete",
+      "Date": " Date",
+      "Task Details": " Task Details",
+      "Back to List": " Back to List",
+      "All Tasks":"All Tasks",
+      "Completed Tasks":"Completed Tasks",
+      "Incomplete Tasks":"Incomplete Tasks",
+      "Category": "Category",
+      "Rating": "Rating",
+      "Favorited": "Favorited",
+      "Add to Favorites": "Add to Favorites",
+      "Share":"Share",
+      "All":"All",
+      "No Tasks Found":"No Tasks Found"
+
+
+    },
+    "Sidebar":{
+      "Home":"Home",
+      "Notes":"Notes",
+      "Favorites":"Favorites",
+      "Settings":"Settings",
+      "Title":"AI Notes"
+    }
+  }
+  
+  
