@@ -11,33 +11,47 @@ export default function LanguageSwitcher() {
     i18n.changeLanguage(savedLang);
     const dir = savedLang === "ar" ? "rtl" : "ltr";
     document.documentElement.dir = dir;
+    document.documentElement.lang = savedLang;
     setDirection(dir);
   }, [i18n]);
 
-  const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLang = e.target.value;
+  const changeLanguage = (newLang: string) => {
     i18n.changeLanguage(newLang);
     const dir = newLang === "ar" ? "rtl" : "ltr";
     document.documentElement.dir = dir;
+    document.documentElement.lang = newLang;
     setDirection(dir);
     localStorage.setItem("language", newLang);
   };
 
   return (
-    <div className="relative inline-block bg-white rounded-lg p-2">
-      <div className="flex items-center border border-none  px-3 py-2  ">
-        <FaGlobe className="text-[#45aa6d]  text-lg mr-2 rtl:ml-2 " />
+    <div className="dropdown dropdown-end">
+      <label
+        tabIndex={0}
+        className="btn flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-[#45aa6d] hover:bg-[#3a8e59] transition-all duration-300 text-sm sm:text-base"
+      >
+        <FaGlobe className="text-base sm:text-lg" />
+        <span className="hidden sm:inline">{i18n.language.toUpperCase()}</span>
+      </label>
 
-        <select
-          value={i18n.language}
-          onChange={changeLanguage}
-          className="px-4 py text-[#45aa6d] text-sm max-w-28 "
-
-        >
-          <option value="en"> English</option>
-          <option value="ar"> العربية</option>
-        </select>
-      </div>
+      <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-auto min-w-[130px] border border-[#45aa6d]">
+        <li>
+          <button
+            onClick={() => changeLanguage("en")}
+            className="btn btn-ghost w-full text-sm sm:text-base hover:bg-[#45aa6d] hover:text-white transition-colors duration-300 font-medium tracking-wide text-left"
+          >
+            English
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => changeLanguage("ar")}
+            className="btn btn-ghost w-full text-sm sm:text-base hover:bg-[#45aa6d] hover:text-white transition-colors duration-300 font-medium tracking-wide text-right"
+          >
+            العربية
+          </button>
+        </li>
+      </ul>
     </div>
   );
 }

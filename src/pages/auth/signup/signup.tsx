@@ -78,8 +78,8 @@ export default function Signup() {
     className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 bg-cover bg-center"
     style={{ backgroundImage: "url('/img/backgrondauthe.png')" }}
   >
-      <Link to="/" className="absolute top-6 left-6 bg-white p-1 rounded-full text-[#33c26c] hover:text-[#7bd39e] transition">
-      <IoMdArrowBack className="text-2xl" />
+      <Link to="/" className="btn btn-circle text-[#ffffff] hover:text-[#ffffff] bg-[#45aa6d] btn-outline absolute top-6 left-6">
+        <IoMdArrowBack className="text-xl" />
       </Link>
             <div className="absolute top-6 right-6">
               <LanguageSwitcher/>
@@ -101,7 +101,7 @@ export default function Signup() {
       placeholder={t("SingUp.name")}
       value={name}
       onChange={(e) => setName(e.target.value)} // استخدم setName هنا
-      className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
+      className="w-full text-[#385243] p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
       required
     />
   </div>
@@ -113,7 +113,7 @@ export default function Signup() {
               placeholder={t("SingUp.username")}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
+              className="w-full text-[#385243] p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
               required
             />
           </div>
@@ -125,7 +125,7 @@ export default function Signup() {
               placeholder={t("SingUp.email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
+              className="w-full text-[#385243] p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
               required
             />
           </div>
@@ -137,7 +137,7 @@ export default function Signup() {
               placeholder={t("SingUp.password")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77] pr-10"
+              className="w-full text-[#385243] p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77] pr-10"
               required
             />
             <button
@@ -156,7 +156,7 @@ export default function Signup() {
               placeholder={t("SingUp.confirmPassword")}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]  pr-10"
+              className="w-full text-[#385243] p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]  pr-10"
               required
             />
             <button

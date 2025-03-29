@@ -126,7 +126,7 @@ export default function VerifyOTP() {
             placeholder={t("VerifyOTP.otpPlaceholder")}
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
+            className="w-full text-[#385243]  p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
             required
           />
 

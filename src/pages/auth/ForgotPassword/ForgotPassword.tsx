@@ -27,8 +27,8 @@ export default function ForgotPassword() {
     className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 bg-cover bg-center"
     style={{ backgroundImage: "url('/img/backgrondauthe.png')" }}
   >
-      <Link to="/" className="absolute top-6 bg-white p-1 rounded-full left-6 text-[#33c26c] hover:text-[#7bd39e] transition">
-      <IoMdArrowBack className="text-2xl" />
+      <Link to="/" className="btn btn-circle text-[#ffffff] hover:text-[#ffffff] bg-[#45aa6d] btn-outline absolute top-6 left-6">
+        <IoMdArrowBack className="text-xl" />
       </Link>
 
             <div className="absolute top-6 right-6">
