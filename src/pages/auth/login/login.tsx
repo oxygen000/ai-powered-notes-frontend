@@ -47,7 +47,7 @@ export default function Login() {
     setError("");
   
     try {
-      const response = await axios.post<UserData>("http://localhost:5000/api/users/login", {
+      const response = await axios.post<UserData>("https://server-p97f6rgqo-oxygen000s-projects.vercel.app/api/users/login", {
         email,
         password,
       });
