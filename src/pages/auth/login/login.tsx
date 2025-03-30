@@ -158,17 +158,17 @@ export default function Login() {
         <div className="flex flex-col gap-3 mt-4 w-full max-w-md">
           <button className="flex items-center border-[#000000] border-2 justify-center gap-3 w-full py-2  rounded-lg hover:bg-gray-200 transition">
             <FcGoogle className="w-5 h-5" />
-            <span className="text-gray-700">{t('SingUp.google')}</span>
+            <span className="text-gray-700">{t('Login.google')}</span>
           </button>
         
           <button className="flex items-center justify-center  gap-3 w-full py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition">
             <FaApple className="w-5 h-5" />
-            <span>{t('SingUp.apple')}</span>
+            <span>{t('Login.apple')}</span>
           </button>
         
           <button className="flex items-center justify-center gap-3 w-full py-2 border-[#000000] border-2  bg-[#1877F2] text-white rounded-lg hover:bg-[#166fe5] transition">
             <FaFacebook className="w-5 h-5" />
-            <span>{t('SingUp.facebook')}</span>
+            <span>{t('Login.facebook')}</span>
           </button>
         </div>
       </div>

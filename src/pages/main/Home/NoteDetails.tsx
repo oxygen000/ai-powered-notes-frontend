@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { toggleCompletion } from "../../../redux/notes/notesSlice";
 import { FaCalendarAlt, FaStar, FaArrowLeft, FaCheckCircle, FaHeart, FaPlus, FaTrash, FaRegHeart } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const NoteDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { notes } = useSelector((state: RootState) => state.notes);
   const [favorites, setFavorites] = useState<number[]>([]);
@@ -23,10 +25,10 @@ const NoteDetails: React.FC = () => {
     return (
       <div className="flex items-center justify-center min-h-screen  p-6">
         <div className="card w-full max-w-md p-6 text-center ">
-          <h1 className="text-2xl text-red-500 font-bold">❌ Task Not Found</h1>
-          <p className="text-lg mt-2 text-black">The requested task does not exist.</p>
+          <h1 className="text-2xl text-red-500 font-bold">{t("NoteDetails.taskNotFound")}</h1>
+          <p className="text-lg mt-2 text-black">{t("NoteDetails.TaskNotExist")}</p>
           <button onClick={() => navigate("/home")} className="btn bg-[#52AE77] border-[#000000] hover:bg-[#3fce78] btn-primary mt-4">
-            <FaArrowLeft className="mr-2" /> Back to List
+            <FaArrowLeft className="mr-2" /> {t("NoteDetails.BackToList")}
           </button>
         </div>
       </div>
@@ -47,7 +49,7 @@ const NoteDetails: React.FC = () => {
       <div className="card w-full max-w-xl shadow-2xl bg-white">
         <div className="card-body">
           <h1 className="card-title text-3xl">{note.title}</h1>
-          {isLastTask && <div className="badge badge-warning text-white">Last Task</div>}
+          {isLastTask && <div className="badge badge-warning text-white">{t("NoteDetails.LastTask")}</div>}
 
           <p className="text-lg flex items-center gap-2 mt-3">
             {note.text}
@@ -64,7 +66,7 @@ const NoteDetails: React.FC = () => {
             </div>
           </div>
           <div className="mt-6">
-            <h2 className="text-xl font-bold mb-2">To-Do Tasks</h2>
+            <h2 className="text-xl font-bold mb-2">{t("NoteDetails.ToDoTasks")}</h2>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -79,7 +81,7 @@ const NoteDetails: React.FC = () => {
             </div>
             <ul className="mt-3 space-y-2">
               {tasks.length === 0 ? (
-                <p className="text-gray-500">No tasks added yet.</p>
+                <p className="text-gray-500">{t("NoteDetails.NotAsksAdded")}</p>
               ) : (
                 tasks.map((task, index) => (
                   <li key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded-md">
@@ -106,7 +108,7 @@ const NoteDetails: React.FC = () => {
         </div>
         <div className="card-actions p-4">
           <button onClick={() => navigate("/home")} className="btn bg-[#52AE77] w-full">
-            <FaArrowLeft className="mr-2" /> Back to List
+            <FaArrowLeft className="mr-2" /> {t("NoteDetails.BackToList")}
           </button>
         </div>
       </div>

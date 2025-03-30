@@ -90,10 +90,14 @@
       "successful":"Login successful!",
       "stayLoggedIn":"Stay Logged In",
       "forgotPassword":"Forgot Password?",
+      "error":"error",
+      "serverError":"Server Error",
+      "connectionError":"Connection Error",
       "or":"Or",
       "google":" Login with Google",
       "facebook":"Login with Facebook",
       "apple":"Login with Apple"
+
   },
   "ForgotPassword":{
       "title": "Forgot Password",
@@ -122,6 +126,9 @@
   "HomeAi":{
       "To-Do List": "To-Do List",
       "Add Task": "Add Task",
+      "hello": "Hello",
+      "hellonow": "You can now access your notes.",
+      "errorlogin": "❌ You are not logged in. You will be redirected to the login page.",
       "Completed": " Completed",
       "Incomplete": " Incomplete",
       "View": " View",
@@ -148,6 +155,17 @@
       "Favorites":"Favorites",
       "Settings":"Settings",
       "Title":"AI Notes"
+    },
+    "NoteDetails":{
+      "taskNotFound": "❌ Task Not Found",
+      "TaskNotExist": "The requested task does not exist.",
+      "BackToList": "Back to List",
+      "LastTask": "Last Task",
+      "ToDoTasks": "To-Do Tasks",
+      "AddNewTask": "Add a new task...",
+      "NotAsksAdded": "No tasks added yet.",
+      "CompleteTask": "Complete Task",
+      "FavoriteTask": "Favorite Task"
     }
   }
   
