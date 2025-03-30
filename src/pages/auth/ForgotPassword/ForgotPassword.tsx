@@ -51,7 +51,7 @@ export default function ForgotPassword() {
               placeholder={t("ForgotPassword.email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#33c26c]"
+              className="w-full text-black p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#33c26c]"
               required
             />
           </div>

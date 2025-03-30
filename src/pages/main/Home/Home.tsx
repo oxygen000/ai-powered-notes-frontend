@@ -1,35 +1,34 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import NotesList from "./NotesList";
-import { useNavigate } from "react-router-dom"; // Vite يستخدم React Router
+import { useNavigate } from "react-router-dom"; 
 
 export default function Home() {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // استخدم useNavigate بدلاً من useRouter
-
+  const navigate = useNavigate(); 
   const fetchUser = useCallback(async () => {
     try {
-      const token = localStorage.getItem("token"); // جلب التوكن من LocalStorage
+      const token = localStorage.getItem("token"); 
       const response = await axios.get("http://localhost:5000/api/users/profile", {
-        withCredentials: true, // إرسال ملفات تعريف الارتباط
-        headers: token ? { Authorization: `Bearer ${token}` } : {}, // إضافة التوكن إذا كان موجودًا
+        withCredentials: true, 
+        headers: token ? { Authorization: `Bearer ${token}` } : {}, 
       });
 
       setUser(response.data);
     } catch (error) {
       console.error("❌ Authentication error:", error);
       if (axios.isAxiosError(error) && error.response?.status === 401) {
-        navigate("/login"); // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
+        navigate("/login"); 
       }
     } finally {
       setLoading(false);
     }
-  }, [navigate]); // أضف `navigate` لأنه يتم استخدامه داخل `fetchUser`
+  }, [navigate]); 
 
   useEffect(() => {
     fetchUser();
-  }, [fetchUser]); // ✅ أضف `fetchUser` كمُعتمد
+  }, [fetchUser]); 
 
   if (loading) {
     return (
@@ -39,7 +38,6 @@ export default function Home() {
     
     );
   }
-
   return (
     <div className="min-h-screen  p-2">
       <div className="max-w-4xl mx-auto rounded-lg p-2">

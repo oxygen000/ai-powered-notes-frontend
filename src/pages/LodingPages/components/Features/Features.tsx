@@ -46,7 +46,7 @@ export default function Features() {
             </div>
 
             <div className="mt-6 flex bg-gray-200 rounded-full p-2 justify-center w-10">
-              <BsArrowLeft className="text-[#32bb68] text-2xl transition-transform duration-300 hover:-translate-x-2 cursor-pointer" />
+              <BsArrowLeft className="text-[#32bb68]  text-2xl transition-transform duration-300 hover:-translate-x-2 cursor-pointer" />
             </div>
           </div>
         ))}
@@ -55,7 +55,7 @@ export default function Features() {
       <div className="flex justify-center mt-12">
         <Link 
           to="/login" 
-          className="w-40 text-center p-3 bg-[#52AE77] text-white font-semibold rounded-lg hover:bg-[#419a66] transition-all duration-300 shadow-md"
+          className="w-40 text-center p-3 bg-[#52AE77] text-white font-semibold rounded-lg border-[#000000] border-2 hover:bg-[#7ab993]  transition-all duration-300 shadow-md"
         >
           {t("features.button")}
         </Link>

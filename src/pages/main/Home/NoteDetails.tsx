@@ -10,41 +10,34 @@ const NoteDetails: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { notes } = useSelector((state: RootState) => state.notes);
-    const [favorites, setFavorites] = useState<number[]>([]);
-  
-    const toggleFavorite = (id: number) => {
-      setFavorites((prev) => (prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]));
+  const [favorites, setFavorites] = useState<number[]>([]);
+  const toggleFavorite = (id: number) => {
+    setFavorites((prev) => (prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]));
     };
   const note = notes.find((n) => n.id === Number(id));
   const isLastTask = note && notes[notes.length - 1].id === note.id;
-
-  // قائمة المهام الفرعية
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTask, setNewTask] = useState("");
 
   if (!note) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-base-200 p-6">
-        <div className="card w-full max-w-md p-6 text-center shadow-lg bg-white">
+      <div className="flex items-center justify-center min-h-screen  p-6">
+        <div className="card w-full max-w-md p-6 text-center ">
           <h1 className="text-2xl text-red-500 font-bold">❌ Task Not Found</h1>
-          <p className="text-lg mt-2">The requested task does not exist.</p>
-          <button onClick={() => navigate("/home")} className="btn btn-primary mt-4">
+          <p className="text-lg mt-2 text-black">The requested task does not exist.</p>
+          <button onClick={() => navigate("/home")} className="btn bg-[#52AE77] border-[#000000] hover:bg-[#3fce78] btn-primary mt-4">
             <FaArrowLeft className="mr-2" /> Back to List
           </button>
         </div>
       </div>
     );
   }
-
-  // إضافة مهمة جديدة
   const addTask = () => {
     if (newTask.trim() !== "") {
       setTasks([...tasks, newTask]);
       setNewTask("");
     }
   };
-
-  // حذف مهمة فرعية
   const removeTask = (index: number) => {
     setTasks(tasks.filter((_, i) => i !== index));
   };
@@ -59,8 +52,6 @@ const NoteDetails: React.FC = () => {
           <p className="text-lg flex items-center gap-2 mt-3">
             {note.text}
           </p>
-
-          {/* معلومات إضافية */}
           <div className="flex justify-between items-center mt-4">
             <div className="flex items-center gap-2 text-gray-600">
               <FaCalendarAlt className="text-[#52AE77]" />
@@ -72,8 +63,6 @@ const NoteDetails: React.FC = () => {
               ))}
             </div>
           </div>
-
-          {/* قائمة To-Do */}
           <div className="mt-6">
             <h2 className="text-xl font-bold mb-2">To-Do Tasks</h2>
             <div className="flex gap-2">
@@ -103,8 +92,6 @@ const NoteDetails: React.FC = () => {
               )}
             </ul>
           </div>
-
-          {/* الأزرار */}
           <div className="flex justify-between mt-4">
             <button 
               onClick={() => dispatch(toggleCompletion(note.id))} 
@@ -112,14 +99,11 @@ const NoteDetails: React.FC = () => {
             >
               <FaCheckCircle className="mr-2" />
             </button>
-
-           <button className="btn text-red-500 px-4 bg-white py-2 rounded-md flex items-center gap-2" onClick={() => toggleFavorite(note.id)}>
-                             {favorites.includes(note.id) ? <FaHeart className="text-lg" /> : <FaRegHeart className="text-lg" />}
-                           </button>
+          <button className="btn text-red-500 px-4 bg-white py-2 rounded-md flex items-center gap-2" onClick={() => toggleFavorite(note.id)}>
+          {favorites.includes(note.id) ? <FaHeart className="text-lg" /> : <FaRegHeart className="text-lg" />}
+          </button>
           </div>
         </div>
-
-        {/* زر العودة */}
         <div className="card-actions p-4">
           <button onClick={() => navigate("/home")} className="btn bg-[#52AE77] w-full">
             <FaArrowLeft className="mr-2" /> Back to List

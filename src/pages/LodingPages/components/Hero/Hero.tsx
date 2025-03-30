@@ -20,7 +20,7 @@ export default function Hero() {
         <p className="text-lg md:text-xl mt-4 max-w-md">
         {t("hero.placeholder")}
         </p>
-        <Link to={'/login'} className="mt-6 w-40 p-3 bg-[#52AE77] text-white font-semibold  hover:bg-[#419a66] transition-transform transform ">
+        <Link to={'/login'} className="mt-6 w-40 p-3 bg-[#52AE77] text-white font-semibold rounded-e-selector   border-[#000000] border-2 hover:bg-[#7ab993] transition-opacity delay-150 transform ">
         {t("hero.button")}
         </Link>
       </div>

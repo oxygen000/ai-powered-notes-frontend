@@ -17,7 +17,7 @@ export default function SubscribeInput() {
           />
         </div>
 
-        <button className="bg-[#52AE77] px-5 py-3 rounded-md text-white font-medium hover:bg-[#419a66] transition">
+        <button className="bg-[#52AE77] border-[#000000] border-2 hover:bg-[#7ab993]  px-5 py-3 rounded-md text-white font-medium transition">
             {t("subscribe.button")}
         </button>
       </div>

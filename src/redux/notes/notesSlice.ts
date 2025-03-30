@@ -7,8 +7,8 @@ export interface Note {
   text: string;
   date: string;
   completed: boolean;
-  rating: number; // التقييم (1-5)
-  isFavorite: boolean; // هل هو في المفضلة؟
+  rating: number; 
+  isFavorite: boolean; 
   
 }
 
@@ -16,7 +16,6 @@ interface NotesState {
   notes: Note[];
 }
 
-// 🌟 مولد نصائح عشوائية باللغة الإنجليزية فقط
 const generateFakeNote = (): Note => ({
   id: faker.number.int(1000),
   title: faker.lorem.words(3),
@@ -31,7 +30,6 @@ const initialState: NotesState = {
   notes: Array.from({ length: 5 }, generateFakeNote),
 };
 
-// 🌟 إنشاء Slice Redux
 const notesSlice = createSlice({
   name: "notes",
   initialState,

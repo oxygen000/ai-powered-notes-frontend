@@ -30,7 +30,7 @@ export default function Sidebar({ isOpen, closeSidebar }: SidebarProps) {
         <h1 className="text-2xl font-bold mt-12">{t("Sidebar.Title")}</h1>
         <nav className="space-y-2 mt-4">
           {menuItems.map((item) => (
-            <Link key={item.path} to={item.path} onClick={closeSidebar} className={`flex items-center gap-3 p-2 rounded-md hover:bg-[#3fce78] transition ${location.pathname === item.path ? "bg-[#3fce78]" : ""}`}>
+            <Link key={item.path} to={item.path} onClick={closeSidebar} className={`flex items-center gap-3 p-2 rounded-md hover:bg-[#537c63] transition ${location.pathname === item.path ? "bg-[#2fa05c]" : ""}`}>
               {item.icon} {item.name}
             </Link>
           ))}

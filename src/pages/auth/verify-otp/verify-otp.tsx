@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { IoMdArrowBack, IoMdRefresh, IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import LanguageSwitcher from "../../../components/LanguageSwitcher/LanguageSwitcher";
 
 export default function VerifyOTP() {
   const [otp, setOtp] = useState("");
@@ -30,8 +31,6 @@ export default function VerifyOTP() {
       return () => clearTimeout(timer);
     }
   }, [resendCooldown]);
-
-  // ✅ التحقق من OTP
   const handleVerifyOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -41,13 +40,12 @@ export default function VerifyOTP() {
     try {
       const response = await axios.post("http://localhost:5000/api/users/verify-otp", { email, otp });
   
-      console.log("🔍 Response:", response.data); // ✅ تحقق من البيانات المستلمة
+      console.log("🔍 Response:", response.data); 
   
-      if (response.data.message === "تم تفعيل الحساب بنجاح!") { // ✅ تحقق من الرسالة مباشرة
+      if (response.data.message === "تم تفعيل الحساب بنجاح!") { 
         setMessage("✅ Account activated successfully!");
         localStorage.removeItem("userEmail");
   
-        // ✅ تأخير بسيط قبل التوجيه
         setTimeout(() => {
           navigate("/account-activated");
         }, 2000); 
@@ -64,7 +62,6 @@ export default function VerifyOTP() {
   
   
 
-  // ✅ إعادة إرسال OTP
   const handleResendOTP = async () => {
     if (resendCooldown > 0) return;
     if (!email) {
@@ -99,20 +96,22 @@ export default function VerifyOTP() {
   
 
   return (
-    
     <div
-      className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 bg-cover bg-center"
+      className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 py-6 bg-cover bg-center"
       style={{ backgroundImage: "url('/img/backgrondauthe.png')" }}
     >
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-6 left-6 bg-white p-2 rounded-full text-[#33c26c] hover:text-[#7bd39e] transition"
+        className="btn btn-circle text-white hover:bg-[#7ab993] bg-[#45aa6d] btn-outline absolute top-4 sm:top-6 left-4 sm:left-6"
       >
-        <IoMdArrowBack className="text-2xl" />
+        <IoMdArrowBack className="text-2xl sm:text-3xl" />
       </button>
+      <div className="absolute top-4 sm:top-6 right-4 sm:right-6">
+              <LanguageSwitcher />
+            </div>
 
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-gray-900 text-center">{t("VerifyOTP.title")}</h2>
+      <div className="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-sm sm:max-w-md">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center">{t("VerifyOTP.title")}</h2>
         <p className="text-sm text-gray-500 text-center mt-2">
           {email ? `📩 ${t("VerifyOTP.subtitle")} ${email}` : t("VerifyOTP.noEmail")}
         </p>
@@ -126,7 +125,7 @@ export default function VerifyOTP() {
             placeholder={t("VerifyOTP.otpPlaceholder")}
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
-            className="w-full text-[#385243]  p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
+            className="w-full text-[#385243] p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52AE77]"
             required
           />
 
@@ -147,7 +146,6 @@ export default function VerifyOTP() {
           </button>
         </form>
 
-        {/* ✅ زر إعادة إرسال OTP */}
         <button
           onClick={handleResendOTP}
           className={`w-full mt-4 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all ${
