@@ -11,7 +11,7 @@ export default function Home() {
   const fetchUser = useCallback(async () => {
     try {
       const token = localStorage.getItem("token"); // جلب التوكن من LocalStorage
-      const response = await axios.get("https://server-p97f6rgqo-oxygen000s-projects.vercel.app/api/users/profile", {
+      const response = await axios.get("http://localhost:5000/api/users/profile", {
         withCredentials: true, // إرسال ملفات تعريف الارتباط
         headers: token ? { Authorization: `Bearer ${token}` } : {}, // إضافة التوكن إذا كان موجودًا
       });
@@ -41,8 +41,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+    <div className="min-h-screen  p-2">
+      <div className="max-w-4xl mx-auto rounded-lg p-2">
         {user ? (
           <>
             <h1 className="text-2xl text-black font-bold mb-4">مرحبًا، {user.name}! 👋</h1>

@@ -27,7 +27,7 @@ export default function Features() {
   ];
 
   return (
-    <div className="py-20 px-6">
+    <div className="py-20 px-6 bg-white">
       <h2 className="text-4xl font-bold text-center text-gray-800">{t("features.title")}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
         {features.map((feature, index) => (

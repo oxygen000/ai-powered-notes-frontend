@@ -1,8 +1,10 @@
 
-export default function favorites() {
+function favorites() {
   return (
-    <div>
-      favorites
+    <div className="text-black">
+      m n,m
     </div>
   )
 }
+
+export default favorites

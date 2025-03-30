@@ -38,7 +38,7 @@ export default function Signup() {
 
     try {
       console.log("🔗 Sending request to backend...");
-      const response = await axios.post("https://server-p97f6rgqo-oxygen000s-projects.vercel.app/api/users/register", {
+      const response = await axios.post("http://localhost:5000/api/users/register", {
         name,
         username,
         email,

@@ -20,7 +20,7 @@ export default function Nav({ toggleSidebar }: { toggleSidebar: () => void }) {
     const fetchUser = useCallback(async () => {
       try {
         const token = localStorage.getItem("token"); // جلب التوكن من LocalStorage
-        const response = await axios.get("https://server-p97f6rgqo-oxygen000s-projects.vercel.app/api/users/profile", {
+        const response = await axios.get("http://localhost:5000/api/users/profile", {
           withCredentials: true, // إرسال ملفات تعريف الارتباط
           headers: token ? { Authorization: `Bearer ${token}` } : {}, // إضافة التوكن إذا كان موجودًا
         });

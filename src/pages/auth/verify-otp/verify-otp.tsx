@@ -39,7 +39,7 @@ export default function VerifyOTP() {
     setMessage("");
   
     try {
-      const response = await axios.post("https://server-p97f6rgqo-oxygen000s-projects.vercel.app/api/users/verify-otp", { email, otp });
+      const response = await axios.post("http://localhost:5000/api/users/verify-otp", { email, otp });
   
       console.log("🔍 Response:", response.data); // ✅ تحقق من البيانات المستلمة
   

@@ -20,14 +20,14 @@ export default function Footer() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-center mt-10">
         <div>
-          <h3 className="text-lg font-semibold">{t("footer.product.title")}</h3>
+          <h3 className="text-lg text-black font-semibold">{t("footer.product.title")}</h3>
           <ul className="text-gray-600 space-y-1">
             <li><Link to="/">{t("footer.product.features")}</Link></li>
             <li><Link to="/">{t("footer.product.pricing")}</Link></li>
           </ul>
         </div>
         <div>
-          <h3 className="text-lg font-semibold">{t("footer.resources.title")}</h3>
+          <h3 className="text-lg text-black font-semibold">{t("footer.resources.title")}</h3>
           <ul className="text-gray-600 space-y-1">
             <li><Link to="/">{t("footer.resources.blog")}</Link></li>
             <li><Link to="/">{t("footer.resources.guides")}</Link></li>
@@ -35,14 +35,14 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className="text-lg font-semibold">{t("footer.company.title")}</h3>
+          <h3 className="text-lg text-black font-semibold">{t("footer.company.title")}</h3>
           <ul className="text-gray-600 space-y-1">
             <li><Link to="/">{t("footer.company.about")}</Link></li>
             <li><Link to="/">{t("footer.company.contact")}</Link></li>
           </ul>
         </div>
         <div>
-          <h3 className="text-lg font-semibold">{t("footer.plans.title")}</h3>
+          <h3 className="text-lg text-black font-semibold">{t("footer.plans.title")}</h3>
           <ul className="text-gray-600 space-y-1">
             <li><Link to="/">{t("footer.plans.personal")}</Link></li>
             <li><Link to="/">{t("footer.plans.startup")}</Link></li>

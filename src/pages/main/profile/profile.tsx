@@ -14,7 +14,7 @@ export default function Profile() {
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("https://server-p97f6rgqo-oxygen000s-projects.vercel.app/api/users/profile", {
+      const response = await axios.get("http://localhost:5000/api/users/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(response.data);

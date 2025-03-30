@@ -30,9 +30,6 @@ const NotesList: React.FC = () => {
 
   return (
     <div className="p-6">
-      {/* عنوان القائمة */}
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">{t("To-Do List")}</h1>
-
       {/* شريط الأدوات العلوي */}
       <div className="flex justify-between items-center mb-6">
         <button
