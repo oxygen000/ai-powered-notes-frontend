@@ -5,7 +5,6 @@ import { FaEye, FaEyeSlash, FaEnvelope, FaLock, FaUser, FaApple, FaFacebook } fr
 import LanguageSwitcher from "../../../components/LanguageSwitcher/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { FcGoogle } from "react-icons/fc";
-import axios from "axios";
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,62 +14,23 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [role] = useState("user"); // الدور الافتراضي
 
-
-
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
-
-    console.log("🚀 Starting Signup Process");
 
     if (password !== confirmPassword) {
       setError("❌ Passwords do not match");
-      setLoading(false);
       return;
     }
 
-    try {
-      console.log("🔗 Sending request to backend...");
-      const response = await axios.post("http://localhost:5000/api/users/register", {
-        name,
-        username,
-        email,
-        password,
-        role,
-      });
-
-      console.log("✅ Server Response:", response.data);
-
-      if (response.status === 201 && response.data.redirect) {
-        console.log("🔄 Redirecting to:", response.data.redirect);
-        
-        // 🟢 تخزين البريد الإلكتروني لاستخدامه في صفحة OTP
-        localStorage.setItem("userEmail", email);
-
-        // ✅ التوجيه إلى صفحة OTP
-        navigate(response.data.redirect);
-      } else {
-        setError(response.data.message || "Something went wrong");
-      }
-    } catch (err: unknown) {
-      console.error("❌ Error during signup:", err);
-      if (axios.isAxiosError(err) && err.response) {
-        setError(err.response.data.message || "Something went wrong. Please try again.");
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
-    } finally {
-      setLoading(false);
-    }
+    console.log("User Data:", { name, username, email, password });
+    // Simulating a successful signup process
+    navigate("/otp");
   };
-  
   
 
   return (
@@ -128,11 +88,9 @@ export default function Signup() {
         </button>
       </div>
 
-      <button type="submit"
-              className={`w-full py-2 text-sm rounded-lg font-semibold transition-all border border-black ${loading ? "bg-[#52AE77] text-white cursor-not-allowed" : "bg-[#33c26c] hover:bg-[#7ab993] text-white"}`}
-              disabled={loading}>
-        {loading ? t("SingUp.signingUp") : t("SingUp.button")}
-      </button>
+      <button type="submit" className="w-full py-2 bg-[#33c26c] border-2 border-black text-white rounded-lg">
+        {t("SingUp.button")}</button>
+
     </form>
 
     <p className="text-center text-xs md:text-sm text-gray-600 mt-4">

@@ -1,5 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import NotesList from "./NotesList";
 import { useNavigate } from "react-router-dom"; 
 import { useTranslation } from "react-i18next";
@@ -8,40 +7,29 @@ export default function Home() {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
-  const navigate = useNavigate(); 
-  const fetchUser = useCallback(async () => {
-    try {
-      const token = localStorage.getItem("token"); 
-      const response = await axios.get("http://localhost:5000/api/users/profile", {
-        withCredentials: true, 
-        headers: token ? { Authorization: `Bearer ${token}` } : {}, 
-      });
-
-      setUser(response.data);
-    } catch (error) {
-      console.error("❌ Authentication error:", error);
-      if (axios.isAxiosError(error) && error.response?.status === 401) {
-        navigate("/login"); 
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, [navigate]); 
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchUser();
-  }, [fetchUser]); 
+    const token = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
+
+    if (token && storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      navigate("/login");
+    }
+    setLoading(false);
+  }, [navigate]);
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-      <span className="loading loading-spinner text-[#52AE77]"></span>
-    </div>
-    
+        <span className="loading loading-spinner text-[#52AE77]"></span>
+      </div>
     );
   }
   return (
-    <div className="min-h-screen  p-2">
+    <div className="min-h-screen p-2">
       <div className="max-w-4xl mx-auto rounded-lg p-2">
         {user ? (
           <>

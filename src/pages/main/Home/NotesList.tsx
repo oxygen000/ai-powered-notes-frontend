@@ -1,15 +1,16 @@
 import React, { useState, Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNote, toggleCompletion, toggleFavorite } from "../../../redux/notes/notesSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { RootState } from "../../../redux/store";
 import LanguageSwitcher from "../../../components/LanguageSwitcher/LanguageSwitcher";
 import { FaPlusCircle, FaCheckCircle, FaTimesCircle, FaEye, FaShareAlt, FaStar, FaRegStar, FaHeart, FaRegHeart } from "react-icons/fa";
+import { motion } from "framer-motion";
+
 
 const NotesList: React.FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { notes } = useSelector((state: RootState) => state.notes);
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState<string>("all");
@@ -18,7 +19,7 @@ const NotesList: React.FC = () => {
   const incompleteNotes = notes.filter((note) => !note.completed);
 
   return (
-    <div className="p-6">
+    <div className="p-6 ">
       <div className="flex justify-between items-center mb-6">
         <button
           className="btn bg-[#52AE77] border-[#000000] hover:bg-[#7ab993] border flex items-center gap-2"
@@ -31,14 +32,14 @@ const NotesList: React.FC = () => {
         <LanguageSwitcher />
       </div>
 
-      <div className="tabs text-black tabs-boxed mb-4">
-        <button className={`tab ${selectedTab === "all" ? "tab-active" : ""}`} onClick={() => setSelectedTab("all")}>
+      <div className="tabs tabs-boxed text-white mb-4 bg-[#52AE77] rounded-2xl">
+        <button className={`tab   ${selectedTab === "all" ? "tab-active" : ""}`} onClick={() => setSelectedTab("all")}>
           {t("HomeAi.All Tasks")}
         </button>
-        <button className={`tab ${selectedTab === "completed" ? "tab-active" : ""}`} onClick={() => setSelectedTab("completed")}>
+        <button className={`tab  ${selectedTab === "completed" ? "tab-active" : ""}`} onClick={() => setSelectedTab("completed")}>
           {t("HomeAi.Completed Tasks")}
         </button>
-        <button className={`tab ${selectedTab === "incomplete" ? "tab-active" : ""}`} onClick={() => setSelectedTab("incomplete")}>
+        <button className={`tab   ${selectedTab === "incomplete" ? "tab-active" : ""}`} onClick={() => setSelectedTab("incomplete")}>
           {t("HomeAi.Incomplete Tasks")}
         </button>
       </div>
@@ -60,14 +61,16 @@ interface Note {
   isFavorite: boolean;
 }
 
-const NotesSection: React.FC<{ notes: Note[]; dispatch: Dispatch; t: (key: string) => string }> = ({ notes, dispatch, t }) => {
+const NotesSection: React.FC<{ notes: Note[]; dispatch: Dispatch<ReturnType<typeof addNote | typeof toggleCompletion | typeof toggleFavorite>>; t: (key: string) => string }> = ({ notes, dispatch, t }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="container grid grid-cols-1 md:grid-cols-2 gap-4">
       {notes.length === 0 ? (
-        <p className="text-gray-500 text-center col-span-2">{t("HomeAi.No Tasks Found")}</p>
+         <motion.p initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-gray-500 text-center col-span-2">
+         {t("HomeAi.No Tasks Found")}
+       </motion.p>
       ) : (
         notes.map((note) => (
-          <div key={note.id} className="card bg-white shadow-lg border border-gray-200 rounded-lg p-6">
+          <motion.div key={note.id} initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.3 }} className="card bg-white shadow-lg border border-gray-200 rounded-lg p-6">
             <h2 className="text-gray-800 font-semibold">{note.title}</h2>
             <p className="text-gray-700">{note.text}</p>
             <small className="text-gray-500 block mt-2">{t("HomeAi.Date")}: {note.date}</small>
@@ -81,23 +84,24 @@ const NotesSection: React.FC<{ notes: Note[]; dispatch: Dispatch; t: (key: strin
             </div>
 
             <div className="mt-4 flex gap-3">
-              <button className={`btn text-black hover:bg-[#45aa6d] hover:text-white  border-2 border-black ${note.completed ? "btn-success text-white bg-[#45aa6d]" : "btn-outline "}`} onClick={() => dispatch(toggleCompletion(note.id))}>
-                {note.completed ? <FaCheckCircle /> : <FaTimesCircle />} {note.completed ? t("HomeAi.Completed") : t("HomeAi.Incomplete")}
-              </button>
-              <Link to={`/note/${note.id}`} className="btn btn-info bg-[#45aa6d] text-white  border-2 border-black">
+            <motion.button whileTap={{ scale: 0.9 }} className={`btn border-2 border-black px-4 py-2 rounded-md flex items-center gap-2 ${note.completed ? "bg-[#52AE77] text-white" : "bg-white text-gray-800"}`} onClick={() => dispatch(toggleCompletion(note.id))}>
+                  {note.completed ? <FaCheckCircle className="text-lg" /> : <FaTimesCircle className="text-lg" />}
+                  {note.completed ? t("HomeAi.Completed") : t("HomeAi.Incomplete")}
+                </motion.button>
+              <Link to={`/note/${note.id}`} className="btn bg-white hover:bg-gray-200 text-lg  text-black  border-2 border-black">
                 <FaEye /> {t("HomeAi.View")}
               </Link>
-              <button className="btn btn-outline bg-[#45aa6d] text-white  border-2 border-black" onClick={() => dispatch(toggleFavorite(note.id))}>
+              <motion.button whileTap={{ scale: 0.9 }} className="btn text-red-500 px-4 text-lg hover:bg-gray-200 bg-white py-2 rounded-md flex items-center gap-2" onClick={() => dispatch(toggleFavorite(note.id))}>
                 {note.isFavorite ? <FaHeart className="text-red-500" /> : <FaRegHeart />}
-              </button>
-              <button className="btn btn-outline bg-[#45aa6d] text-white  border-2 border-black" >
-                <FaShareAlt/>
-              </button>
+              </motion.button>
+              <motion.button whileTap={{ scale: 0.9 }} className="btn border-2 border-black bg-white text-black px-4 py-2 rounded-md flex items-center gap-2">
+                  <FaShareAlt className="text-lg" />
+                </motion.button>
             </div>
-          </div>
+          </motion.div>
         ))
       )}
-    </div>
+    </motion.div>
   );
 };
 

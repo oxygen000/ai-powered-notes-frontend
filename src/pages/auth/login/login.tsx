@@ -6,24 +6,13 @@ import LanguageSwitcher from "../../../components/LanguageSwitcher/LanguageSwitc
 import { useTranslation } from "react-i18next";
 import { FaApple, FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
-
-interface UserData {
-  token: string;
-  name: string;
-  email: string;
-  role: string;
-  avatar?: string;
-  username: string;
-  message?: string;
-}
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>(localStorage.getItem("email") || "test@example.com");
+  const [password, setPassword] = useState<string>(localStorage.getItem("password") || "password");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { t } = useTranslation();
@@ -31,46 +20,47 @@ export default function Login() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) navigate("/login");
+    if (token) navigate("/home");
   }, [navigate]);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
-  
-    try {
-      const response = await axios.post<UserData>("http://localhost:5000/api/users/login", {
-        email,
-        password,
-      });
-  
-      const { token, name, email: userEmail, role, avatar, username, message } = response.data;
-  
-      if (!token) {
-        setError(message || t("Login.error"));
-        toast.error(message || t("Login.error"));
-        return;
-      }
-  
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify({ name, email: userEmail, role, avatar, username }));
-  
-      toast.success(t("Login.success"));
-      navigate("/home");
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        const axiosError = err as AxiosError<{ message?: string }>;
-        setError(axiosError.response?.data?.message || t("Login.serverError"));
-        toast.error(axiosError.response?.data?.message || t("Login.serverError"));
+
+    // محاكاة تسجيل الدخول بدون API
+    setTimeout(() => {
+      if (email === "test@example.com" && password === "password") {
+        const mockUser = {
+          token: "mock_token_123",
+          name: "Test User",
+          email,
+          role: "user",
+          avatar: "",
+          username: "testuser",
+        };
+
+        localStorage.setItem("token", mockUser.token);
+        localStorage.setItem("user", JSON.stringify(mockUser));
+
+        toast.success(t("Login.success"));
+        navigate("/home");
       } else {
-        setError(t("Login.connectionError"));
-        toast.error(t("Login.connectionError"));
+        setError(t("Login.invalidCredentials"));
+        toast.error(t("Login.invalidCredentials"));
       }
-    } finally {
       setLoading(false);
-    }
+    }, 1000);
   };
+
+  // حفظ البريد الإلكتروني وكلمة المرور عند تغييره
+  useEffect(() => {
+    localStorage.setItem("email", email);
+  }, [email]);
+
+  useEffect(() => {
+    localStorage.setItem("password", password);
+  }, [password]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-3 py-4 sm:p-4 bg-cover bg-center"
@@ -141,36 +131,35 @@ export default function Login() {
           >
             {loading ? t("Login.login") : t("Login.button")}
           </button>
-        </form>
-
-        <p className="text-center text-xs sm:text-sm text-gray-600 mt-3 sm:mt-4">
+          <p className="text-center text-xs sm:text-sm text-gray-600 sm:mt-4">
           {t("Login.alreadyHaveAccount")}{" "}
           <Link to="/signup" className="text-[#33c26c] hover:underline font-semibold">
             {t("Login.loginHere")}
           </Link>
         </p>
+          <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-6 w-full">
+            <div className="flex-grow border-t border-gray-300"></div>
+            <span className="px-2 sm:px-4 py-0.5 sm:py-1 text-gray-500 font-medium">{t("Login.or")}</span>
+            <div className="flex-grow border-t border-gray-300"></div>
+          </div>
 
-        <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-6 w-full">
-          <div className="flex-grow border-t border-gray-300"></div>
-          <span className="px-2 sm:px-4 py-0.5 sm:py-1 text-gray-500 font-medium">{t("Login.or")}</span>
-          <div className="flex-grow border-t border-gray-300"></div>
-        </div>
-        <div className="flex flex-col gap-3 mt-4 w-full max-w-md">
-          <button className="flex items-center border-[#000000] border-2 justify-center gap-3 w-full py-2  rounded-lg hover:bg-gray-200 transition">
-            <FcGoogle className="w-5 h-5" />
-            <span className="text-gray-700">{t('Login.google')}</span>
-          </button>
+          <div className="flex flex-col gap-3 mt-4 w-full max-w-md">
+            <button className="flex items-center border-[#000000] border-2 justify-center gap-3 w-full py-2 rounded-lg hover:bg-gray-200 transition">
+              <FcGoogle className="w-5 h-5" />
+              <span className="text-gray-700">{t('Login.google')}</span>
+            </button>
         
-          <button className="flex items-center justify-center  gap-3 w-full py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition">
-            <FaApple className="w-5 h-5" />
-            <span>{t('Login.apple')}</span>
-          </button>
+            <button className="flex items-center justify-center gap-3 w-full py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition">
+              <FaApple className="w-5 h-5" />
+              <span>{t('Login.apple')}</span>
+            </button>
         
-          <button className="flex items-center justify-center gap-3 w-full py-2 border-[#000000] border-2  bg-[#1877F2] text-white rounded-lg hover:bg-[#166fe5] transition">
-            <FaFacebook className="w-5 h-5" />
-            <span>{t('Login.facebook')}</span>
-          </button>
-        </div>
+            <button className="flex items-center justify-center gap-3 w-full py-2 border-[#000000] border-2 bg-[#1877F2] text-white rounded-lg hover:bg-[#166fe5] transition">
+              <FaFacebook className="w-5 h-5" />
+              <span>{t('Login.facebook')}</span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

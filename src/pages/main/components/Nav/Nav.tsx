@@ -1,42 +1,33 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaBars,  FaUser } from "react-icons/fa";
+import { FaBars, FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { Menu } from "@headlessui/react";
-import { useCallback, useEffect, useState } from "react";
-import axios from "axios";
-
+import { useEffect, useState } from "react";
 
 export default function Nav({ toggleSidebar }: { toggleSidebar: () => void }) {
   const userImage = localStorage.getItem("userImage") || "/img/profile.jpg";
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
-  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    } else {
+      const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+      if (storedUser?.name && storedUser?.email) {
+        setUser(storedUser);
+      }
+    }
+  }, [navigate, token]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userImage");
+    localStorage.removeItem("user");
     window.location.href = "/login";
   };
-
-    const fetchUser = useCallback(async () => {
-      try {
-        const token = localStorage.getItem("token"); 
-        const response = await axios.get("http://localhost:5000/api/users/profile", {
-          withCredentials: true,
-          headers: token ? { Authorization: `Bearer ${token}` } : {}, 
-        });
-        setUser(response.data);
-      } catch (error) {
-        console.error("❌ Authentication error:", error);
-        if (axios.isAxiosError(error) && error.response?.status === 401) {
-          navigate("/login"); 
-        }
-      } 
-    }, [navigate]); 
-  
-    useEffect(() => {
-      fetchUser();
-    }, [fetchUser]); 
-  
 
   return (
     <nav className="bg-white shadow w-full flex items-center justify-between px-4 md:px-6 py-3 md:py-4">
@@ -50,8 +41,6 @@ export default function Nav({ toggleSidebar }: { toggleSidebar: () => void }) {
         </h1>
       </Link>
       <div className="flex items-center gap-4">
-        <button className="text-gray-600 hover:text-gray-800 text-xl transition">
-        </button>
         <Menu as="div" className="relative">
           <Menu.Button className="flex items-center gap-2 cursor-pointer focus:outline-none">
             <img

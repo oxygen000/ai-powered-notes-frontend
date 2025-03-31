@@ -2,28 +2,16 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMdArrowBack, IoMdRefresh, IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
 import LanguageSwitcher from "../../../components/LanguageSwitcher/LanguageSwitcher";
 
 export default function VerifyOTP() {
   const [otp, setOtp] = useState("");
-  const [email, setEmail] = useState(""); 
+  const [email] = useState("test@example.com"); 
   const [loading, setLoading] = useState(false);
-  const [resendLoading, setResendLoading] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(30);
-  const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const { t } = useTranslation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const storedEmail = localStorage.getItem("userEmail");
-    if (storedEmail) {
-      setEmail(storedEmail);
-    } else {
-      setError("❌ No email found. Please sign up again.");
-    }
-  }, []);
 
   useEffect(() => {
     if (resendCooldown > 0) {
@@ -31,68 +19,17 @@ export default function VerifyOTP() {
       return () => clearTimeout(timer);
     }
   }, [resendCooldown]);
-  const handleVerifyOTP = async (e: React.FormEvent) => {
+
+  const handleVerifyOTP = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
-    setMessage("");
-  
-    try {
-      const response = await axios.post("http://localhost:5000/api/users/verify-otp", { email, otp });
-  
-      console.log("🔍 Response:", response.data); 
-  
-      if (response.data.message === "تم تفعيل الحساب بنجاح!") { 
-        setMessage("✅ Account activated successfully!");
-        localStorage.removeItem("userEmail");
-  
-        setTimeout(() => {
-          navigate("/account-activated");
-        }, 2000); 
-      } else {
-        setError(response.data.message || "❌ Invalid OTP. Please try again.");
-      }
-    } catch (err) {
-      console.error("❌ Server error:", err);
-      setError("❌ Server error. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
+    setMessage("✅ OTP verified successfully!");
+    setTimeout(() => {
+      navigate("/account-activated");
+    }, 2000);
+    setLoading(false);
   };
-  
-  
 
-  const handleResendOTP = async () => {
-    if (resendCooldown > 0) return;
-    if (!email) {
-      setError("❌ No email found. Please sign up again.");
-      return;
-    }
-  
-    setResendLoading(true);
-    setError("");
-    setMessage("");
-  
-    try {
-      const response = await axios.post("http://localhost:5000/api/users/resend-otp", { email });
-  
-      console.log("🔄 Resend Response:", response.data);
-  
-      if (response.data.success) {
-        setMessage("✅ A new OTP has been sent to your email."); // ✅ تصحيح التخزين كنص
-        setResendCooldown(30);
-      } else {
-        setError(response.data.message || "❌ Failed to resend OTP. Please try again.");
-      }
-    } catch (err) {
-      console.error("❌ Server error:", err);
-      setError("❌ Server error. Please try again later.");
-    } finally {
-      setResendLoading(false);
-    }
-  };
-  
-  
   
 
   return (
@@ -117,7 +54,6 @@ export default function VerifyOTP() {
         </p>
 
         {message && <p className="text-green-500 text-center mt-2">{message}</p>}
-        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
 
         <form onSubmit={handleVerifyOTP} className="mt-6 flex flex-col gap-4">
           <input
@@ -147,23 +83,12 @@ export default function VerifyOTP() {
         </form>
 
         <button
-          onClick={handleResendOTP}
           className={`w-full mt-4 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all ${
-            resendCooldown > 0
-              ? "bg-gray-400 text-white cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600 text-white"
+            resendCooldown > 0 ? "bg-gray-400 text-white cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 text-white"
           }`}
-          disabled={resendCooldown > 0 || resendLoading}
+          disabled={resendCooldown > 0}
         >
-          {resendLoading ? (
-            <span>🔄 Resending...</span>
-          ) : resendCooldown > 0 ? (
-            <span>⏳ {resendCooldown}s</span>
-          ) : (
-            <>
-              <IoMdRefresh className="text-xl" /> {t("VerifyOTP.resendButton")}
-            </>
-          )}
+          {resendCooldown > 0 ? <span>⏳ {resendCooldown}s</span> : <><IoMdRefresh className="text-xl" /> Resend OTP</>}
         </button>
       </div>
     </div>

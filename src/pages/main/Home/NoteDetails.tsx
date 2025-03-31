@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { toggleCompletion } from "../../../redux/notes/notesSlice";
-import { FaCalendarAlt, FaStar, FaArrowLeft, FaCheckCircle, FaHeart, FaPlus, FaTrash, FaRegHeart } from "react-icons/fa";
+import { FaCalendarAlt, FaStar, FaArrowLeft, FaCheckCircle, FaHeart, FaPlus, FaTrash, FaRegHeart, FaTimesCircle } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 const NoteDetails: React.FC = () => {
@@ -95,12 +95,9 @@ const NoteDetails: React.FC = () => {
             </ul>
           </div>
           <div className="flex justify-between mt-4">
-            <button 
-              onClick={() => dispatch(toggleCompletion(note.id))} 
-              className={`btn text-[#52AE77] border-black justify-center text-center  hover:bg-[#84c79f] ${note.completed ? "btn-success text-white bg-[#52AE77]" : "btn-outline "}`}
-            >
-              <FaCheckCircle className="mr-2" />
-            </button>
+            <button className={`btn text-black hover:bg-[#45aa6d] hover:text-white  border-2 border-black ${note.completed ? "btn-success text-white bg-[#45aa6d]" : "btn-outline "}`} onClick={() => dispatch(toggleCompletion(note.id))}>
+                           {note.completed ? <FaCheckCircle /> : <FaTimesCircle />} {note.completed ? t("HomeAi.Completed") : t("HomeAi.Incomplete")}
+                         </button>
           <button className="btn text-red-500 px-4 bg-white py-2 rounded-md flex items-center gap-2" onClick={() => toggleFavorite(note.id)}>
           {favorites.includes(note.id) ? <FaHeart className="text-lg" /> : <FaRegHeart className="text-lg" />}
           </button>
