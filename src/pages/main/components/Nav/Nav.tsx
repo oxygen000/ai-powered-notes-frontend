@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaBars, FaSearch, FaUser } from "react-icons/fa";
+import { FaBars,  FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { Menu } from "@headlessui/react";
 import { useCallback, useEffect, useState } from "react";
@@ -51,7 +51,6 @@ export default function Nav({ toggleSidebar }: { toggleSidebar: () => void }) {
       </Link>
       <div className="flex items-center gap-4">
         <button className="text-gray-600 hover:text-gray-800 text-xl transition">
-          <FaSearch />
         </button>
         <Menu as="div" className="relative">
           <Menu.Button className="flex items-center gap-2 cursor-pointer focus:outline-none">

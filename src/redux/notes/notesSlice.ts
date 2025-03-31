@@ -7,9 +7,8 @@ export interface Note {
   text: string;
   date: string;
   completed: boolean;
-  rating: number; 
-  isFavorite: boolean; 
-  
+  rating: number;
+  isFavorite: boolean;
 }
 
 interface NotesState {
@@ -48,7 +47,6 @@ const notesSlice = createSlice({
       const note = state.notes.find((n) => n.id === action.payload);
       if (note) note.isFavorite = !note.isFavorite;
     },
-
   },
 });
 
