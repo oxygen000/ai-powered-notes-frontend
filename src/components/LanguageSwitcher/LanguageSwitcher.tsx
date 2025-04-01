@@ -28,7 +28,7 @@ export default function LanguageSwitcher() {
     <div className="dropdown dropdown-end">
       <label
         tabIndex={0}
-        className="btn flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-[#45aa6d] border-[#000000] hover:bg-[#7ab993] transition-all duration-300 text-sm sm:text-base"
+        className="btn flex transition-all duration-[900ms] items-center gap-2 px-3 py-2 rounded-lg text-white bg-[#45aa6d] border-[#000000] hover:bg-[#7ab993]  text-sm sm:text-base"
       >
         <FaGlobe className="text-base sm:text-lg " />
         <span className="hidden sm:inline">{i18n.language.toUpperCase()}</span>
@@ -38,7 +38,7 @@ export default function LanguageSwitcher() {
         <li>
           <button
             onClick={() => changeLanguage("en")}
-            className="btn btn-ghost w-full text-sm sm:text-base hover:bg-[#7ab993] hover:text-white transition-colors duration-300 font-medium tracking-wide text-left"
+            className="btn btn-ghost w-full  text-sm sm:text-base hover:bg-[#7ab993] hover:text-white transition-colors duration-300 font-medium tracking-wide text-left"
           >
             English
           </button>

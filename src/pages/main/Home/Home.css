@@ -1,0 +1,34 @@
+.temple {
+    color: #ffffff;
+    background-color: transparent;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    transition: 
+        color 0.3s ease-in-out, 
+        opacity 0.5s ease-in-out, 
+        transform 0.3s ease-in-out, 
+        outline 0.3s ease-in-out;
+}
+.temple:hover {
+    opacity: 0.5;
+}
+
+.temple:active {
+    opacity: 0.4;
+
+}
+.temple1{
+display: flex;
+justify-content: center;
+}
+
+.temple:focus,
+.temple:focus-visible {
+color: rgb(207, 197, 197);   
+transform: scale(1.02);
+}

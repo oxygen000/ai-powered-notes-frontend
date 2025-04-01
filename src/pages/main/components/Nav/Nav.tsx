@@ -30,7 +30,7 @@ export default function Nav({ toggleSidebar }: { toggleSidebar: () => void }) {
   };
 
   return (
-    <nav className="bg-white shadow w-full flex items-center justify-between px-4 md:px-6 py-3 md:py-4">
+    <nav className="bg-white shadow border-b-2 border-black  w-full flex items-center justify-between px-4 md:px-6 py-3 md:py-4">
       <button onClick={toggleSidebar} className="text-gray-600 hover:text-gray-800 text-2xl transition md:hidden">
         <FaBars />
       </button>
@@ -47,7 +47,7 @@ export default function Nav({ toggleSidebar }: { toggleSidebar: () => void }) {
               src={userImage} 
               alt="User"
               title="Profile"
-              className="w-10 h-10 rounded-full border border-gray-300 hover:shadow-md transition"
+              className="w-10 h-10 rounded-full border-2 border-black hover:shadow-md transition"
             />
           </Menu.Button>
           <Menu.Items className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg overflow-hidden">

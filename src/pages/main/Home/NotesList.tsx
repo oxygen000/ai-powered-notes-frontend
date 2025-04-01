@@ -8,7 +8,6 @@ import LanguageSwitcher from "../../../components/LanguageSwitcher/LanguageSwitc
 import { FaPlusCircle, FaCheckCircle, FaTimesCircle, FaEye, FaShareAlt, FaStar, FaRegStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-
 const NotesList: React.FC = () => {
   const dispatch = useDispatch();
   const { notes } = useSelector((state: RootState) => state.notes);
@@ -20,9 +19,9 @@ const NotesList: React.FC = () => {
 
   return (
     <div className="p-6 ">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center  mb-6">
         <button
-          className="btn bg-[#52AE77] border-[#000000] hover:bg-[#7ab993] border flex items-center gap-2"
+          className="btn bg-[#52AE77]  border-[#000000] transition-all duration-[900ms] hover:bg-[#7ab993] border flex items-center gap-2"
           onClick={() => dispatch(addNote())}
         >
           <FaPlusCircle className="text-xl" />
@@ -32,14 +31,14 @@ const NotesList: React.FC = () => {
         <LanguageSwitcher />
       </div>
 
-      <div className="tabs tabs-boxed text-white mb-4 bg-[#52AE77] rounded-2xl">
-        <button className={`tab   ${selectedTab === "all" ? "tab-active" : ""}`} onClick={() => setSelectedTab("all")}>
+      <div className="tabs tabs-boxed flex justify-center  border-2  border-black mb-4 bg-[#52AE77] rounded-2xl">
+        <button className={`tab transition-all text-[16px] duration-[900ms]  ${selectedTab === "all" ? "tab-active" : ""}`} onClick={() => setSelectedTab("all")}>
           {t("HomeAi.All Tasks")}
         </button>
-        <button className={`tab  ${selectedTab === "completed" ? "tab-active" : ""}`} onClick={() => setSelectedTab("completed")}>
+        <button className={`tab transition-all text-[16px] duration-[900ms]  ${selectedTab === "completed" ? "tab-active" : ""}`} onClick={() => setSelectedTab("completed")}>
           {t("HomeAi.Completed Tasks")}
         </button>
-        <button className={`tab   ${selectedTab === "incomplete" ? "tab-active" : ""}`} onClick={() => setSelectedTab("incomplete")}>
+        <button className={`tab transition-all text-[16px] duration-[900ms]  ${selectedTab === "incomplete" ? "tab-active" : ""}`} onClick={() => setSelectedTab("incomplete")}>
           {t("HomeAi.Incomplete Tasks")}
         </button>
       </div>
@@ -83,7 +82,7 @@ const NotesSection: React.FC<{ notes: Note[]; dispatch: Dispatch<ReturnType<type
               ))}
             </div>
 
-            <div className="mt-4 flex gap-3">
+            <div className="mt-4 flex flex-wrap gap-2 sm:gap-3  justify-center">
             <motion.button whileTap={{ scale: 0.9 }} className={`btn border-2 border-black px-4 py-2 rounded-md flex items-center gap-2 ${note.completed ? "bg-[#52AE77] text-white" : "bg-white text-gray-800"}`} onClick={() => dispatch(toggleCompletion(note.id))}>
                   {note.completed ? <FaCheckCircle className="text-lg" /> : <FaTimesCircle className="text-lg" />}
                   {note.completed ? t("HomeAi.Completed") : t("HomeAi.Incomplete")}

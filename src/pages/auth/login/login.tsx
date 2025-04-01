@@ -114,7 +114,7 @@ export default function Login() {
 
           <div className="flex justify-between items-center text-xs sm:text-sm">
             <label className="flex items-center gap-2 text-gray-600">
-              <input type="checkbox" checked={stayLoggedIn} onChange={() => setStayLoggedIn(!stayLoggedIn)} className="checkbox checkbox-success" />
+              <input type="checkbox" checked={stayLoggedIn} onChange={() => setStayLoggedIn(!stayLoggedIn)} className="checkbox checkbox-success border-2 border-black bg-[#52AE77] " />
               {t("Login.stayLoggedIn")}
             </label>
             <Link to="/forgotpassword" className="text-[#33c26c] hover:underline">
